@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdullah Rehman — BI Engineer & Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080c10;--bg2:#0d1117;--bg3:#111820;
+  --line:#1e2d3d;--accent:#00d4ff;--gold:#f0b429;--green:#4ade80;
+  --text:#e8f0f7;--muted:#5a7a94;--white:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:rgba(8,12,16,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:0.06em;text-transform:uppercase;}
+.nav-links{display:flex;gap:2.2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 4rem 5rem;position:relative;z-index:1;opacity:0;animation:fadeUp 0.9s ease forwards 0.1s;}
+.eyebrow{font-size:0.76rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem;display:flex;align-items:center;gap:0.7rem;}
+.eyebrow::before{content:'';display:inline-block;width:28px;height:1px;background:var(--accent);}
+h1.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,7vw,6rem);line-height:1.0;color:var(--white);letter-spacing:-0.02em;margin-bottom:0.4rem;}
+.hero-role{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(1.3rem,3vw,2.4rem);color:var(--accent);margin-bottom:1.6rem;}
+.hero-desc{font-size:1rem;font-weight:300;color:rgba(232,240,247,0.62);max-width:580px;line-height:1.9;margin-bottom:2.8rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-p{background:var(--accent);color:var(--bg);font-weight:600;padding:0.85rem 2.2rem;border:none;border-radius:3px;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:0.84rem;letter-spacing:0.08em;text-transform:uppercase;transition:transform 0.2s,box-shadow 0.2s;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,0.22);}
+.btn-g{background:transparent;color:var(--text);font-weight:500;padding:0.85rem 2.2rem;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:0.84rem;letter-spacing:0.08em;text-transform:uppercase;transition:border-color 0.2s,color 0.2s;}
+.btn-g:hover{border-color:var(--accent);color:var(--accent);}
+
+/* FLOATING CARD */
+.data-badge{position:absolute;right:4rem;top:50%;transform:translateY(-50%);border:1px solid var(--line);border-radius:6px;padding:1.8rem;background:var(--bg2);min-width:230px;font-size:0.78rem;color:var(--muted);}
+.db-title{color:var(--accent);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem;}
+.db-row{display:flex;justify-content:space-between;margin-bottom:0.7rem;gap:1rem;}
+.db-row .val{color:var(--green);font-size:0.75rem;}
+.db-row .val.gold{color:var(--gold);}
+.db-bar{height:3px;background:var(--line);border-radius:2px;margin-top:1.2rem;overflow:hidden;}
+.db-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));width:0;transition:width 1.5s ease 1s;}
+
+/* SHARED SECTION STYLES */
+section.wrap{padding:5.5rem 4rem;position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.sec-ey{font-size:0.74rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem;}
+.sec-ey::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent);}
+.sec-title{font-family:'Syne',sans-serif;font-weight:700;font-size:2.2rem;color:var(--white);margin-bottom:2.6rem;line-height:1.15;}
+
+/* ABOUT */
+#about{opacity:0;animation:fadeUp 0.9s ease forwards 0.25s;}
+.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:start;}
+.about-body{font-size:0.96rem;line-height:1.95;color:rgba(232,240,247,0.65);}
+.about-body p+p{margin-top:1rem;}
+.about-quote{border-left:2px solid var(--accent);padding-left:1rem;margin-top:1.8rem;font-style:italic;color:rgba(232,240,247,0.7);line-height:1.75;font-size:0.94rem;}
+.quick-card{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1.8rem;}
+.qc-label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem;}
+.qc-row{display:flex;justify-content:space-between;font-size:0.86rem;padding-bottom:0.8rem;margin-bottom:0.2rem;border-bottom:1px solid var(--line);}
+.qc-row:last-child{border-bottom:none;padding-bottom:0;}
+.qc-row .lbl{color:var(--muted);}
+.status-dot{color:var(--green);}
+
+/* EXPERIENCE */
+#experience{opacity:0;animation:fadeUp 0.9s ease forwards 0.35s;}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--line);}
+.tl-item{display:grid;grid-template-columns:auto 1fr;gap:1.8rem;padding-bottom:2.8rem;}
+.tl-dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);margin-top:4px;flex-shrink:0;position:relative;z-index:1;}
+.tl-dot.active{background:var(--accent);}
+.tl-date{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+.tl-company{font-family:'Syne',sans-serif;font-size:1.1rem;color:var(--white);font-weight:600;margin-bottom:0.15rem;}
+.tl-role{font-size:0.84rem;color:var(--muted);margin-bottom:0.9rem;}
+.tl-desc{font-size:0.88rem;color:rgba(232,240,247,0.62);line-height:1.85;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.9rem;}
+.tl-tag{font-size:0.72rem;padding:0.22rem 0.65rem;border-radius:2px;background:rgba(0,212,255,0.07);color:rgba(0,212,255,0.75);border:1px solid rgba(0,212,255,0.15);}
+
+/* SKILLS */
+#skills{opacity:0;animation:fadeUp 0.9s ease forwards 0.4s;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;}
+.sg{background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:1.4rem;transition:border-color 0.25s,transform 0.25s;}
+.sg:hover{border-color:rgba(0,212,255,0.28);transform:translateY(-3px);}
+.sg-cat{font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.9rem;}
+.sg-items{display:flex;flex-wrap:wrap;gap:0.45rem;}
+.sg-item{font-size:0.76rem;padding:0.25rem 0.65rem;border-radius:2px;background:rgba(0,212,255,0.06);color:rgba(232,240,247,0.72);border:1px solid rgba(0,212,255,0.13);}
+
+/* PROJECTS */
+#projects{opacity:0;animation:fadeUp 0.9s ease forwards 0.45s;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem;}
+.proj-card{background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1.7rem;transition:border-color 0.25s,transform 0.25s;display:flex;flex-direction:column;}
+.proj-card:hover{border-color:rgba(0,212,255,0.28);transform:translateY(-3px);}
+.pc-icon{font-size:1.5rem;margin-bottom:1rem;}
+.pc-title{font-family:'Syne',sans-serif;font-size:1.05rem;color:var(--white);font-weight:600;margin-bottom:0.5rem;}
+.pc-desc{font-size:0.84rem;color:rgba(232,240,247,0.58);line-height:1.75;flex:1;margin-bottom:1rem;}
+.pc-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.pc-tag{font-size:0.7rem;padding:0.2rem 0.55rem;border-radius:2px;background:rgba(240,180,41,0.08);color:var(--gold);border:1px solid rgba(240,180,41,0.2);}
+
+/* EDUCATION */
+#education{opacity:0;animation:fadeUp 0.9s ease forwards 0.5s;}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;}
+.edu-card{background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1.7rem;}
+.ec-deg{font-family:'Syne',sans-serif;font-size:1rem;color:var(--white);font-weight:600;margin-bottom:0.3rem;}
+.ec-uni{font-size:0.84rem;color:var(--accent);margin-bottom:0.5rem;}
+.ec-meta{font-size:0.78rem;color:var(--muted);line-height:1.7;}
+.ec-thesis{font-size:0.78rem;color:rgba(232,240,247,0.5);margin-top:0.5rem;font-style:italic;line-height:1.65;}
+.gpa-badge{display:inline-block;margin-top:0.7rem;font-size:0.72rem;padding:0.22rem 0.65rem;border-radius:2px;background:rgba(0,212,255,0.08);color:var(--accent);border:1px solid rgba(0,212,255,0.18);}
+
+/* CONTACT */
+#contact{opacity:0;animation:fadeUp 0.9s ease forwards 0.55s;}
+.contact-wrap{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:3.2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.cl-head{font-family:'Syne',sans-serif;font-size:1.7rem;color:var(--white);margin-bottom:0.9rem;line-height:1.2;}
+.cl-body{font-size:0.88rem;color:var(--muted);line-height:1.85;}
+.clinks{display:flex;flex-direction:column;gap:0.75rem;}
+.clink{display:flex;align-items:center;gap:0.9rem;padding:0.85rem 1.1rem;border:1px solid var(--line);border-radius:4px;color:var(--text);text-decoration:none;font-size:0.84rem;transition:border-color 0.2s,background 0.2s,color 0.2s;}
+.clink:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,0.04);}
+.ci{width:22px;text-align:center;font-size:0.95rem;}
+.cl{font-size:0.68rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.1rem;}
+.cv{font-size:0.85rem;}
+
+footer{text-align:center;padding:2rem;font-size:0.74rem;color:var(--muted);border-top:1px solid var(--line);letter-spacing:0.08em;position:relative;z-index:1;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{gap:1.2rem;}
+  #hero{padding:7.5rem 1.5rem 4rem;}
+  .data-badge{display:none;}
+  section.wrap{padding:4rem 1.5rem;}
+  .about-grid,.contact-wrap,.edu-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AR.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:none;">
+  <div class="eyebrow">Currently at Addo AI</div>
+  <h1 class="hero-name">Abdullah<br/>Rehman</h1>
+  <p class="hero-role">BI Engineer &amp; Data Engineer</p>
+  <p class="hero-desc">Data professional specializing in ETL pipeline operations, data validation, and BI dashboard development. Skilled in Apache Airflow, SQL (Hive/Trino), Tableau, and enterprise data environments.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">View Experience</button>
+    <button class="btn-g" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get In Touch</button>
+  </div>
+
+  <div class="data-badge">
+    <div class="db-title">Current Stack</div>
+    <div class="db-row"><span>Apache Airflow</span><span class="val">Active</span></div>
+    <div class="db-row"><span>SQL · Hive / Trino</span><span class="val">Active</span></div>
+    <div class="db-row"><span>Tableau Dashboards</span><span class="val">Active</span></div>
+    <div class="db-row"><span>Informatica / Teradata</span><span class="val gold">Learning</span></div>
+    <div class="db-bar"><div class="db-bar-fill" id="barFill"></div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="wrap" id="about">
+  <div class="sec-ey">About me</div>
+  <h2 class="sec-title">From Raw Data to<br/>Real Decisions</h2>
+  <div class="about-grid">
+    <div>
+      <div class="about-body">
+        <p>I'm Abdullah — an Associate Data Engineer at Addo AI based in Karachi, Pakistan, specializing in designing, building, and optimizing scalable ETL pipelines, data workflows, and analytics solutions. I work extensively with data validation, pipeline monitoring, and performance optimization to ensure high data quality, reliability, and business readiness.</p>
+        <p>My experience includes delivering data engineering solutions for enterprise banking environments, where I develop interactive dashboards, automate reporting processes, and enable data-driven decision-making. I bring hands-on expertise in data pipelines, SQL, data modeling, and BI tools, along with a strong foundation in troubleshooting, debugging, and maintaining production-grade data systems.</p>
+        <p>In addition to my industry experience, my background in web development and academic teaching allows me to bridge the gap between technical implementation and clear communication of insights to both technical and non-technical stakeholders.</p>
+        <p>I hold an MSc in Computer Science, with a research focus on IoT-based Machine Learning systems, strengthening my analytical thinking and data-first approach to solving complex problems.</p>
+        <blockquote class="about-quote">"Good data engineering is invisible — when it's done right, the data just works."</blockquote>
+      </div>
+    </div>
+    <div class="quick-card">
+      <div class="qc-label">Quick Facts</div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+        <div class="qc-row"><span class="lbl">Current Role</span><span>Data Engineer · Addo AI</span></div>
+        <div class="qc-row"><span class="lbl">Location</span><span>Karachi, Pakistan</span></div>
+        <div class="qc-row"><span class="lbl">Databases</span><span>Teradata · Trino · MySQL</span></div>
+        <div class="qc-row"><span class="lbl">Pipelines</span><span>Airflow · Informatica</span></div>
+        <div class="qc-row"><span class="lbl">Education</span><span>MSc Computer Science</span></div>
+        <div class="qc-row" style="border-bottom:none;padding-bottom:0;"><span class="lbl">Status</span><span class="status-dot">● Open to Opportunities</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="wrap" id="experience">
+  <div class="sec-ey">Work history</div>
+  <h2 class="sec-title">Experience</h2>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div>
+        <div class="tl-date">Nov 2025 – Present</div>
+        <div class="tl-company">Addo AI</div>
+        <div class="tl-role">Associate Data Engineer · Karachi, Pakistan</div>
+        <div class="tl-desc">Design, build, and monitor ETL pipelines using Apache Airflow, ensuring timely execution of workflows and KPI availability across enterprise data environments. Identify and resolve pipeline failures caused by missing files, table creation issues, and data inconsistencies. Perform data validation and reconciliation using SQL (Hive/Trino) on DBeaver to maintain high data accuracy and integrity. Develop interactive Tableau dashboards and optimize SQL queries for reporting and business decision-making. Collaborate with cross-functional teams within secure, compliance-driven environments, adhering to data governance standards. Support data migration from development to production and maintain SOPs for operational shifts. Continuously enhance expertise in Informatica and Teradata.</div>
+        <div class="tl-tags"><span class="tl-tag">Apache Airflow</span><span class="tl-tag">Hive / Trino</span><span class="tl-tag">DBeaver</span><span class="tl-tag">Tableau</span><span class="tl-tag">SQL</span><span class="tl-tag">Informatica</span><span class="tl-tag">Teradata</span><span class="tl-tag">ETL Pipelines</span><span class="tl-tag">Data Migration</span><span class="tl-tag">KPI Validation</span><span class="tl-tag">Data Governance</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-date">Mar 2024 – Jul 2025</div>
+        <div class="tl-company">PMAS Arid Agriculture University</div>
+        <div class="tl-role">Visiting Lecturer · Rawalpindi, Pakistan</div>
+        <div class="tl-desc">Delivered lectures and lab sessions on Digital Logic Design. Designed course materials, evaluated assignments and quizzes, and supervised Final Year Projects with academic and technical mentorship.</div>
+        <div class="tl-tags"><span class="tl-tag">Digital Logic Design</span><span class="tl-tag">Academic Mentoring</span><span class="tl-tag">FYP Supervision</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-date">Jul 2023 – Dec 2023</div>
+        <div class="tl-company">Cobweb Design Studio</div>
+        <div class="tl-role">Web Development Intern · Rawalpindi, Pakistan</div>
+        <div class="tl-desc">Developed dynamic web applications using MERN stack. Built and maintained backend APIs with Laravel. Designed interactive UIs with Vue.js and collaborated with senior developers using Git, REST APIs, and Agile workflows.</div>
+        <div class="tl-tags"><span class="tl-tag">MERN Stack</span><span class="tl-tag">Laravel</span><span class="tl-tag">Vue.js</span><span class="tl-tag">REST APIs</span><span class="tl-tag">Git</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="wrap" id="skills">
+  <div class="sec-ey">Technical skills</div>
+  <h2 class="sec-title">My Stack</h2>
+  <div class="skills-grid">
+    <div class="sg">
+      <div class="sg-cat">Data Engineering</div>
+      <div class="sg-items"><span class="sg-item">Apache Airflow</span><span class="sg-item">ETL Pipelines</span><span class="sg-item">Data Validation</span><span class="sg-item">Data Migration</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Databases</div>
+      <div class="sg-items"><span class="sg-item">Teradata</span><span class="sg-item">Trino</span><span class="sg-item">Hive</span><span class="sg-item">MySQL</span><span class="sg-item">DBeaver</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Languages</div>
+      <div class="sg-items"><span class="sg-item">Python</span><span class="sg-item">SQL</span><span class="sg-item">C++ / C</span><span class="sg-item">JavaScript</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">BI & Visualization</div>
+      <div class="sg-items"><span class="sg-item">Tableau</span><span class="sg-item">Excel (VBA)</span><span class="sg-item">Power BI</span><span class="sg-item">Data Science</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Integration & Tools</div>
+      <div class="sg-items"><span class="sg-item">Informatica Developer</span><span class="sg-item">NumPy</span><span class="sg-item">Pandas</span><span class="sg-item">Jupyter</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Frontend & Web</div>
+      <div class="sg-items"><span class="sg-item">HTML / CSS</span><span class="sg-item">Bootstrap</span><span class="sg-item">Tailwind CSS</span><span class="sg-item">MERN Basics</span><span class="sg-item">Vue.js</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Dev Tools</div>
+      <div class="sg-items"><span class="sg-item">Git</span><span class="sg-item">Visual Studio</span><span class="sg-item">CLI</span><span class="sg-item">REST APIs</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-cat">Writing & Research</div>
+      <div class="sg-items"><span class="sg-item">Research Writing</span><span class="sg-item">Content Writing</span><span class="sg-item">SOP Development</span><span class="sg-item">Technical Docs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="wrap" id="projects">
+  <div class="sec-ey">Projects</div>
+  <h2 class="sec-title">Work Showcase</h2>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="pc-icon">🏨</div>
+      <div class="pc-title">Hotel Management Portal</div>
+      <p class="pc-desc">Full-stack hotel management platform enabling users to search and book hotels, register their own properties, manage bookings, and access interactive dashboards for operational insights.</p>
+      <div class="pc-tags"><span class="pc-tag">MongoDB</span><span class="pc-tag">Express.js</span><span class="pc-tag">React</span><span class="pc-tag">Node.js</span><span class="pc-tag">JWT Auth</span><span class="pc-tag">REST API</span></div>
+    </div>
+
+    <div class="proj-card">
+      <div class="pc-icon">🌱</div>
+      <div class="pc-title">Automated Greenhouse System</div>
+      <p class="pc-desc">Smart IoT greenhouse system with sensors for temperature, humidity, light, and soil moisture. Data transmitted to an online platform for ML-based analysis with Python and Jupyter Notebook visualizations. Automates irrigation, lighting, and climate control.</p>
+      <div class="pc-tags"><span class="pc-tag">Arduino / IoT</span><span class="pc-tag">Python</span><span class="pc-tag">Jupyter</span><span class="pc-tag">Machine Learning</span><span class="pc-tag">Data Viz</span></div>
+    </div>
+
+    <div class="proj-card">
+      <div class="pc-icon">🎲</div>
+      <div class="pc-title">3D Rubik's Cube</div>
+      <p class="pc-desc">Interactive 3D Rubik's Cube game built in Unity, enabling users to rotate, solve, and visualize the cube in a realistic environment with smooth controls and engaging game mechanics.</p>
+      <div class="pc-tags"><span class="pc-tag">Unity</span><span class="pc-tag">C#</span><span class="pc-tag">3D Game Dev</span></div>
+    </div>
+
+    <div class="proj-card">
+      <div class="pc-icon">🚗</div>
+      <div class="pc-title">Car Showroom Website</div>
+      <p class="pc-desc">Responsive and interactive car showroom website with features for browsing car models, viewing detailed specs, and navigating pages with a clean, modern frontend design.</p>
+      <div class="pc-tags"><span class="pc-tag">HTML</span><span class="pc-tag">CSS</span><span class="pc-tag">JavaScript</span><span class="pc-tag">Responsive Design</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="wrap" id="education">
+  <div class="sec-ey">Education</div>
+  <h2 class="sec-title">Academic Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="ec-deg">Master of Science — Computer Science</div>
+      <div class="ec-uni">PMAS Arid Agriculture University</div>
+      <div class="ec-meta">Rawalpindi, Pakistan &nbsp;·&nbsp; 2021 – 2024</div>
+      <div class="ec-thesis">Thesis: Secure IoT-based Data Gathering Framework for Greenhouse using Machine Learning Technique</div>
+      <div><span class="gpa-badge">GPA 2.96 / 4.00</span></div>
+    </div>
+    <div class="edu-card">
+      <div class="ec-deg">Bachelor of Science — Computer Science</div>
+      <div class="ec-uni">PMAS Arid Agriculture University</div>
+      <div class="ec-meta">Rawalpindi, Pakistan &nbsp;·&nbsp; 2017 – 2021</div>
+      <div><span class="gpa-badge">GPA 3.26 / 4.00</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="wrap" id="contact">
+  <div class="sec-ey">Contact</div>
+  <h2 class="sec-title">Let's Connect</h2>
+  <div class="contact-wrap">
+    <div>
+      <div class="cl-head">Open to Opportunities &amp; Collaborations</div>
+      <p class="cl-body">Whether you have a data engineering project, a BI challenge, or want to collaborate — my inbox is always open. Let's build something meaningful together.</p>
+    </div>
+    <div class="clinks">
+      <a class="clink" href="mailto:abdullahrehman410@gmail.com">
+        <span class="ci">✉</span>
+        <div><span class="cl">Email</span><span class="cv">abdullahrehman410@gmail.com</span></div>
+      </a>
+      <a class="clink" href="https://wa.me/923348881151" target="_blank">
+        <span class="ci">📱</span>
+        <div><span class="cl">WhatsApp</span><span class="cv">+92 334 888 1151</span></div>
+      </a>
+      <a class="clink" href="https://github.com/AbdullahRehman410" target="_blank">
+        <span class="ci">⌥</span>
+        <div><span class="cl">GitHub</span><span class="cv">github.com/AbdullahRehman410</span></div>
+      </a>
+      <a class="clink" href="https://www.linkedin.com/in/abdullah-rehman-732aba1aa" target="_blank">
+        <span class="ci">in</span>
+        <div><span class="cl">LinkedIn</span><span class="cv">linkedin.com/in/abdullah-rehman</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>Designed &amp; built by Abdullah Rehman &nbsp;·&nbsp; BI Engineer &amp; Data Engineer &nbsp;·&nbsp; 2025</footer>
+
+<script>
+  setTimeout(()=>{const f=document.getElementById('barFill');if(f)f.style.width='78%';},1200);
+</script>
+</body>
+</html>
